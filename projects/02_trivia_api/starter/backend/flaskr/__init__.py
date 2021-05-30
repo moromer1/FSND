@@ -172,7 +172,9 @@ def create_app(test_config=None):
         new_dif = body.get('difficulty', None)
         new_cat = body.get('category', None)
 
-        if new_q is None or new_ans is None or new_cat is None or new_dif is None:
+        if {
+          new_q is None or new_ans is None or
+          new_cat is None or new_dif is None}:
             abort(400)
         else:
             question = Question(
@@ -195,7 +197,9 @@ def create_app(test_config=None):
             })
 
         except BaseException:
-            if new_q is None or new_ans is None or new_cat is None or new_dif is None:
+            if {
+              new_q is None or new_ans is None or
+              new_cat is None or new_dif is None}:
                 abort(400)
             else:
                 abort(422)

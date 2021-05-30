@@ -75,6 +75,23 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(data['total_questions'])
 
 
+    def test_delete_question(self):
+        res = self.client().delete('/questions/5')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['deleted'])
+
+
+    def test_404_delete_question(self):
+        res = self.client().delete('/questions/1000')
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        
+
     def test_404_sent_requesting_beyond_valid_page(self):
         res = self.client().get('/questions?page=100')
         data = json.loads(res.data)

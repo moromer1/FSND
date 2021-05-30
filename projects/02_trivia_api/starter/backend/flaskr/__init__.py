@@ -13,8 +13,14 @@ from models import setup_db, Question, Category
 QUESTIONS_PER_PAGE = 10
 
 def paginate_questions(request, selection):
-  page = request.args.get('page', 1, type = int)
-  start = (page - 1) * QUESTIONS_PER_PAGE
+
+  items_limit = request.args.get('limit', 10, type = int)
+  selected_page = request.args.get('page', 1 , type = int )
+  current_index = selected_page - 1
+
+  questions = Question.query.order_by(Question.id).limit(items_limit).offset(current_index * items_limit).all()
+
+  start = (selected_page - 1) * QUESTIONS_PER_PAGE
   end = start + QUESTIONS_PER_PAGE
 
   questions = [Question.format() for Question in selection]
@@ -102,8 +108,7 @@ def create_app(test_config=None):
         'success' : True,
         'questions' : current_questions,
         'total_questions' : len(selection),
-        'categories': arr_categories,
-        'current_category' : arr_categories
+        'categories': arr_categories
       })
     except:
       if len(current_questions) == 0:

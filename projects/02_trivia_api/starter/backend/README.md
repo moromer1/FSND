@@ -205,7 +205,7 @@ POST '/http://localhost:5000/questions/add'
 POST '/http://localhost:5000/questions/search'
 - Searches for questions based on the 'search_term'
 - Returns success value, list of paginated questions, number of total questions, and current category.
-()()()()()()()()()()()()()()()()()ARGUMENTS()()()()()()()()()()()()()()()()()()() 
+
 
 DELETE '/http://localhost:5000/questions/<int:question_id>'
 - Deletes question of a given ID if it exists

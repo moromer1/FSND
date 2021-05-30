@@ -209,6 +209,7 @@ POST '/http://localhost:5000/questions/search'
 
 DELETE '/http://localhost:5000/questions/<int:question_id>'
 - Deletes question of a given ID if it exists
+- Takes question_id of type int as an argument
 - Returns: success value, and deleted book ID
 {
     "success":true,
